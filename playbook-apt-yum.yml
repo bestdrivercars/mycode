@@ -1,0 +1,33 @@
+---
+- name: Our first play
+  hosts: planetexpress
+  connection: ansible.builtin.ssh   # default is ssh
+  gather_facts: true # runs by default
+  become: yes # run entire playbook with sudo
+ 
+  tasks:
+    - name: "Install epel-release"
+      ansible.builtin.yum:
+        name: epel-release
+        state: present
+      when: ansible_distribution == "CentOS"
+
+    - name: Install packages on CentOS machines
+      ansible.builtin.yum:
+        update_cache: True # This parameter ensures that the YUM package repository cache is updated
+                           # before installing any packages. This is similar to
+                           # running yum makecache on the command line,
+                           # which makes sure that the package metadata is up-to-date.
+        name:
+            - sl
+            - fail2ban
+            - moon-buggy
+            - yum-utils
+        state: latest
+      when: ansible_distribution == "CentOS"
+
+    - name: Install steam locomotive on Ubuntu machines
+      ansible.builtin.apt:
+        name: sl
+        state: present
+      when: ansible_distribution == "Ubuntu"
