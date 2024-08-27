@@ -1,0 +1,18 @@
+---
+- name: A simple file playbook
+  hosts: planetexpress
+  gather_facts: yes
+  connection: ansible.builtin.ssh
+
+  tasks:
+  # make 2 new directories name "output" & "output2" at user's /home and /opt/
+   - name: make a directory
+     ansible.builtin.file:
+       path: ~/output/
+       path: /opt/output2/
+       state: directory
+     become: yes  #elevage privilge to have write permission to /opt/
+  
+   - name: use shell module with wildcarding
+     ## output path of user's home into path.txt and the word "testing" into text.txt
+     ansible.builtin.shell: echo $HOME >> ~/output/path.txt; echo "testing" >> ~/output/text.txt
