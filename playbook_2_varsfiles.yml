@@ -1,0 +1,47 @@
+---
+- name: bootstrapping and new user
+  hosts: raiders
+  gather_facts: no
+
+  # vars_files expects a list of 1 or more files
+  vars_files:
+    - vars/newusers1.yml
+    - vars/newusers2.yml
+
+  tasks:
+  # update the apt catalog
+  - name: "update apt with latest repo info"
+    ansible.builtin.raw: "apt update -y"
+    become: yes
+
+  # install Python3 and pip3 with ansible
+  - name: "Bootstrap python install"
+    ansible.builtin.raw: "apt install -y python3-pip"
+    become: yes
+
+  # create a new group
+  - name: Create the new group sandbox
+    ansible.builtin.group:
+      name: sandbox
+      state: present
+    become: yes
+
+    # create new user on target system
+    # use the "user" module, loop thru the list "users1,users2" defined
+    # in the var newusers1.yml newuser2.yml file above
+    # create new users and set name=to new users in the var list
+  - name: Add new users to group 'sandbox'
+    ansible.builtin.user:
+      name: "{{ item }}"
+      comment: throwaway user account for testing
+      state: present
+      shell: /bin/bash       # Defaults to /bin/bash
+      system: no             # Defaults to no. This indicates 
+                             # that the account is a regular user account, not a system account. 
+                             # System accounts are typically used for services and have a lower UID.      
+      createhome: yes        # Defaults to yes
+      group: sandbox
+    become: yes
+    loop: "{{ users1 + users2 }}"
+    ## notice how we combine two separate lists with the above technique
+
