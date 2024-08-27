@@ -1,0 +1,29 @@
+---
+- name: Copy environmental var value into a file without use of shell module
+  hosts: planetexpress   # defined in inventory
+  gather_facts: yes
+  connection: ansible.builtin.ssh
+
+  tasks:
+
+   - name: make a directory
+     ansible.builtin.file:
+       path: ~/output/
+       state: directory
+
+  # NOT idempotent (will run every time)
+  #- name: use shell module with wildcarding
+  #  ansible.builtin.shell: echo $HOME >> ~/output/path.txt
+
+  # idempotent solution
+   - name: use copy to avoid using a shell command
+     ansible.builtin.copy:                         # use the copy module
+       # this retrieves "env info" and "os_family" from gathered facts ("left side" of the shell command).
+       # ansible_env.HOME <= HOME child variable in the ansible_env
+       # ansible_os_family <= no need for the . because it's just a text value without any child
+       content: "{{ ansible_env.HOME, ansible_os_family }}"
+       dest: ~/output/path.txt                     # ("right side" of the shell command)
+       force: yes                                  # always overwrite the file if the content is different
+
+
+
