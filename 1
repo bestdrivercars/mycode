@@ -1,0 +1,17 @@
+###
+#Create a new template task. This single task should include a loop statement. Loop across the following list, [{"mission": "primary", "planet": "luna park"}, {"mission": "secondary", "planet": "cineplex 14"}]. The loop should produce two files, the first one should be titled primary-mission-orders.txt, and the second secondary-mission-orders.txt. Place both of these files on the remote hosts. Do all of this without modifying the template.
+---
+- name: Template with a loop
+  hosts: fry
+  connection: ansible.builtin.ssh
+  gather_facts: no
+  
+- name: This solution requires no modification of the existing templates. Instead, we leverage the usage of variable precedence
+  ansible.builtin.template:
+    src: templates/mission-orders.txt.j2     # name of the template on ansible controller
+    dest: "~/{{ item.mission }}-mission-orders.txt"  # each time through the loop, we want a file named uniquely
+  vars:
+          planet: "{{ item.planet }}"
+  loop:   # each time through the loop, each dict (list entry) will be an "item"
+          - {"mission": "primary", "planet": "luna park"}
+          - {"mission": "secondary", "planet": "cineplex 14"}  ## This is the list we want to loop across
