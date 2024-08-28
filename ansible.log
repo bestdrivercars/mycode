@@ -1,0 +1,156 @@
+2024-08-28 22:48:32,340 p=475146 u=student n=ansible | PLAY [Logging - Everything to standard out gets logged] ************************************************************
+2024-08-28 22:48:32,351 p=475146 u=student n=ansible | TASK [First debug] *************************************************************************************************
+2024-08-28 22:48:32,377 p=475146 u=student n=ansible | ok: [localhost]
+2024-08-28 22:48:32,379 p=475146 u=student n=ansible | TASK [Second debug] ************************************************************************************************
+2024-08-28 22:48:32,401 p=475146 u=student n=ansible | ok: [localhost] => {
+    "msg": "The second message in the playbook."
+}
+2024-08-28 22:48:32,412 p=475146 u=student n=ansible | PLAY RECAP *********************************************************************************************************
+2024-08-28 22:48:32,412 p=475146 u=student n=ansible | localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-08-28 22:49:49,558 p=475359 u=student n=ansible | PLAY [Logging - Everything to standard out gets logged] ************************************************************
+2024-08-28 22:49:49,568 p=475359 u=student n=ansible | TASK [First debug] *************************************************************************************************
+2024-08-28 22:49:49,599 p=475359 u=student n=ansible | ok: [localhost]
+2024-08-28 22:49:49,602 p=475359 u=student n=ansible | TASK [Second debug] ************************************************************************************************
+2024-08-28 22:49:49,625 p=475359 u=student n=ansible | ok: [localhost] => {
+    "msg": "The second message in the playbook."
+}
+2024-08-28 22:49:49,632 p=475359 u=student n=ansible | PLAY RECAP *********************************************************************************************************
+2024-08-28 22:49:49,632 p=475359 u=student n=ansible | localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-08-28 22:50:32,891 p=475470 u=student n=ansible | PLAY [Turn off logging at play level] ******************************************************************************
+2024-08-28 22:50:32,901 p=475470 u=student n=ansible | TASK [Perform an API lookup (this may display sensitive data)] *****************************************************
+2024-08-28 22:50:33,773 p=475470 u=student n=ansible | ok: [localhost]
+2024-08-28 22:50:33,776 p=475470 u=student n=ansible | TASK [Debug task left in by a developer for debugging] *************************************************************
+2024-08-28 22:50:33,810 p=475470 u=student n=ansible | ok: [localhost] => {
+    "results": {
+        "access_control_allow_credentials": "true",
+        "access_control_allow_origin": "*",
+        "changed": false,
+        "connection": "close",
+        "content_type": "application/json; charset=utf-8",
+        "cookies": {},
+        "cookies_string": "",
+        "date": "Wed, 28 Aug 2024 22:50:33 GMT",
+        "elapsed": 0,
+        "failed": false,
+        "json": {
+            "alternativeName": "S/2002 N 4",
+            "aphelion": 0,
+            "argPeriapsis": 0,
+            "aroundPlanet": {
+                "planet": "neptune",
+                "rel": "https://api.le-systeme-solaire.net/rest/bodies/neptune"
+            },
+            "avgTemp": 0,
+            "axialTilt": 0,
+            "bodyType": "Moon",
+            "density": 1.0,
+            "dimension": "",
+            "discoveredBy": "Matthew J. Holman",
+            "discoveryDate": "14/08/2002",
+            "eccentricity": 0.495,
+            "englishName": "Neso",
+            "equaRadius": 0,
+            "escape": 0,
+            "flattening": 0,
+            "gravity": 0,
+            "id": "neso",
+            "inclination": 132.6,
+            "isPlanet": false,
+            "longAscNode": 0,
+            "mainAnomaly": 0,
+            "mass": {
+                "massExponent": 17,
+                "massValue": 1.0
+            },
+            "meanRadius": 30.0,
+            "moons": null,
+            "name": "Néso",
+            "perihelion": 0,
+            "polarRadius": 0,
+            "semimajorAxis": 48390000,
+            "sideralOrbit": 9374.0,
+            "sideralRotation": 0,
+            "vol": {
+                "volExponent": 0,
+                "volValue": 0.0
+            }
+        },
+        "msg": "OK (unknown bytes)",
+        "redirected": false,
+        "server": "Apache",
+        "status": 200,
+        "transfer_encoding": "chunked",
+        "url": "https://api.le-systeme-solaire.net/rest/bodies/neso"
+    }
+}
+2024-08-28 22:50:33,816 p=475470 u=student n=ansible | PLAY RECAP *********************************************************************************************************
+2024-08-28 22:50:33,816 p=475470 u=student n=ansible | localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-08-28 22:50:38,136 p=475509 u=student n=ansible | PLAY [Turn off logging at play level] ******************************************
+2024-08-28 22:50:38,146 p=475509 u=student n=ansible | TASK [Perform an API lookup (this may display sensitive data)] *****************
+2024-08-28 22:50:38,991 p=475509 u=student n=ansible | ok: [localhost]
+2024-08-28 22:50:38,994 p=475509 u=student n=ansible | TASK [Debug task left in by a developer for debugging] *************************
+2024-08-28 22:50:39,027 p=475509 u=student n=ansible | ok: [localhost] => {
+    "results": {
+        "access_control_allow_credentials": "true",
+        "access_control_allow_origin": "*",
+        "changed": false,
+        "connection": "close",
+        "content_type": "application/json; charset=utf-8",
+        "cookies": {},
+        "cookies_string": "",
+        "date": "Wed, 28 Aug 2024 22:50:38 GMT",
+        "elapsed": 0,
+        "failed": false,
+        "json": {
+            "alternativeName": "S/2002 N 4",
+            "aphelion": 0,
+            "argPeriapsis": 0,
+            "aroundPlanet": {
+                "planet": "neptune",
+                "rel": "https://api.le-systeme-solaire.net/rest/bodies/neptune"
+            },
+            "avgTemp": 0,
+            "axialTilt": 0,
+            "bodyType": "Moon",
+            "density": 1.0,
+            "dimension": "",
+            "discoveredBy": "Matthew J. Holman",
+            "discoveryDate": "14/08/2002",
+            "eccentricity": 0.495,
+            "englishName": "Neso",
+            "equaRadius": 0,
+            "escape": 0,
+            "flattening": 0,
+            "gravity": 0,
+            "id": "neso",
+            "inclination": 132.6,
+            "isPlanet": false,
+            "longAscNode": 0,
+            "mainAnomaly": 0,
+            "mass": {
+                "massExponent": 17,
+                "massValue": 1.0
+            },
+            "meanRadius": 30.0,
+            "moons": null,
+            "name": "Néso",
+            "perihelion": 0,
+            "polarRadius": 0,
+            "semimajorAxis": 48390000,
+            "sideralOrbit": 9374.0,
+            "sideralRotation": 0,
+            "vol": {
+                "volExponent": 0,
+                "volValue": 0.0
+            }
+        },
+        "msg": "OK (unknown bytes)",
+        "redirected": false,
+        "server": "Apache",
+        "status": 200,
+        "transfer_encoding": "chunked",
+        "url": "https://api.le-systeme-solaire.net/rest/bodies/neso"
+    }
+}
+2024-08-28 22:50:39,033 p=475509 u=student n=ansible | PLAY RECAP *********************************************************************
+2024-08-28 22:50:39,033 p=475509 u=student n=ansible | localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
