@@ -1,0 +1,53 @@
+1. Change directory to the /home/student/ directory.
+
+student@bchd:~$ cd ~
+
+2. Ensure tree is installed. We'll use it a bit later in the lab.
+
+student@bchd:~$ sudo apt install tree -y
+
+3. Let's mimic a new project, and learn about Ansible architecture at the same time. One of the takeaways from this lab will be it pays to be organized. Make a new directory to mimic our new project.
+
+student@bchd:~$ mkdir -p ~/mycode/classicproject/
+
+4. The roles directory might exist in a few different locations, but let's create one local to our new project folder.
+
+student@bchd:~$ mkdir -p ~/mycode/classicproject/roles/
+
+5. Move into the new directory.
+
+student@bchd:~$ cd ~/mycode/classicproject/roles/
+
+6. Use the ansible-galaxy command line tool (this installs with Ansible) to create the directory structure and files associated with a role. Roles are named after the parent directory that stores this highly organized directory structure.
+
+student@bchd:~/mycode/classicproject/roles$ ansible-galaxy init bootstrap
+
+7. Run a tree command to see the directory layout of a role.
+
+student@bchd:~/mycode/classicproject/roles$ tree
+
+8. In a 'real' role, we would now begin to fill in the main.yml files with tasks, and possibly move templates and files into the appropriate directories. Here is quick rundown of each folder:
+
+tasks - contains the main list of tasks to be executed by the role.
+handlers - contains handlers, which may be used by this role or even anywhere outside this role.
+defaults - default variables for the role (see Using Variables for more information).
+vars - other variables for the role (see Using Variables for more information).
+files - contains files which can be deployed via this role.
+templates - contains templates which can be deployed via this role.
+meta - defines some meta data for this role. See below for more details.
+
+9. For now, just use ansible-galaxy to create the remaining role structures.
+
+student@bchd:~/mycode/classicproject/roles$ ansible-galaxy init securityapps
+
+10. In a 'real' role, we would fill in the main.yml files with tasks. For now, just use ansible-galaxy to create the remaining role structures.
+
+student@bchd:~/mycode/classicproject/roles$ ansible-galaxy init officetools
+
+11. Move back into your home directory.
+
+student@bchd:~/mycode/classicproject/roles$ cd ~
+
+12. Create a playbook that uses roles. You won't be running this playbook. It is only for reference.
+
+student@bchd:~$ vim ~/mycode/classicproject/classicpb.yml
