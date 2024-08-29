@@ -1,0 +1,48 @@
+### Need install
+# - python3 -m pip install ansible-pylibssh
+#
+### Set .ansible.cfg with the following:
+# - interpreter_python = /usr/bin/python3
+# define where the latest version of python resides
+#
+---
+- name: Arista Config Saver
+  hosts: eosswitches
+  # collect facts about controller
+  # so that ansible_date_time is defined
+  gather_facts: yes
+
+  # location on the controller
+  vars_files:
+    - ~/switch.creds  # use network login info in "switch.creds" to login
+
+  tasks:
+  - name: Arista Fact Collection
+    eos_facts:
+      gather_subset: all  # IMPORTANT! Look at the Return values at the bottom of the eos_facts module
+
+  - name: get the current date
+    command: date "+%Y-%m-%d"
+    register: result
+    vars:
+      ansible_connection: local  ## switch only this task to local connection to grab the date info. on the local system
+
+  - name: set a variable to make date easier
+    ansible.builtin.set_fact:
+      date_now: "{{ result.stdout }}"    ## use set_fact to register to date_now
+
+  - name: Create dir to save switch config backups
+    ansible.builtin.file:
+      path: ~/mycode/backup/{{ date_now }}/
+      state: directory    # Playbook will FAIL without this directory
+
+  - name: Arista Config Save        
+    ansible.builtin.copy:
+      content: "{{ ansible_net_config }}"
+      dest: "~/mycode/backup/{{ date_now }}/{{ inventory_hostname }}_{{ansible_facts.net_version}}-config.backup"
+
+  - name: Arista Archival Process. Put into zip
+    archive:
+      path: "~/mycode/backup/{{ date_now }}/{{ inventory_hostname }}_{{ansible_facts.net_version}}-config.backup"
+      remove: True     # removes the original file
+
