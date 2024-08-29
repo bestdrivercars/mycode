@@ -1,0 +1,3 @@
+## Should we wish to create a new role, the ansible-galaxy CLI tool will stub a role template. Type the following:
+
+student@bchd:~/galaxy/roles$ ansible-galaxy role init ~/galaxy/roles/arista_backup
