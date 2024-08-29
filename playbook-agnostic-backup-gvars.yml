@@ -1,0 +1,31 @@
+### We know that on an Arista EOS device and Cisco IOS, the command to get running config is show running-config, therefore both of our group_vars files have the same value for the variable backup. However the save commands are a bit different. An EOS expects copy running-config startup-config, whereas the IOS expects write memory. In the following playbooks, we can reference these different values that were set within the group_vars files. The secret, was naming the files the same as groups found within the inventory, ~/mycode/inv/dev/nethosts.
+
+
+---
+- name: backup all switch configs
+  hosts: eosswitches:iosswitches   # these two groups
+  gather_facts: false
+  become: yes # run the entire playbook as enable
+  connection: network_cli # required mode
+
+  # no vars section but we have our
+  # group vars that should be read into
+  # our playbook along with our inventory
+
+  tasks:
+
+    - name: pull backup from switches
+      cli_command:
+        command: "{{backup}}"  # call the "backup" variable in eosswitches.yml in /group_vars/
+      register: backup
+
+    - name: ensure backup directory is created
+      file:
+        path: ~/mycode/backup/
+        state: directory
+
+    - name: write out the backup to a file
+      copy:
+        content: "{{backup.stdout}}"
+        dest: "~/mycode/backup/{{inventory_hostname}}.backup"
+
