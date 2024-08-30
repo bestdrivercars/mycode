@@ -1,0 +1,29 @@
+---
+- name: Using the arista_backup role we created
+  hosts: all
+  connection: network_cli   # used to  connect to network devices
+  gather_facts: yes
+
+  # this is the collection we want to make part of this playbook namespace
+  collections:
+  - adalovelace.myfirstcollection
+
+  vars:
+    ansible_network_os: eos
+
+  vars_files:
+    - ~/switch.creds
+
+      # roles:
+      #- arista_backup
+
+  tasks:
+
+    # use role1 from adalovelace.myfirstcollection
+    - import_role:
+        name: arista-cfg-bk  # Corrected role name
+    
+    
+    - name: print to the screen
+      debug:
+        msg: "the roles section will run before any tasks"
